@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
           baseStyle: TextStyle( color: Colors.white.withOpacity(0.5), fontSize: 25.0 ),
           selectedStyle: TextStyle(color: Colors.cyan),
         ),
-        BiblioTec(name: "BiblioTec", mainColor: Colors.cyan,)));
+        BiblioTec(name: "BiblioTec", mainColor: Colors.cyan[50],)));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(

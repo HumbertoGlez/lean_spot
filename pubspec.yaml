@@ -47,6 +47,12 @@ flutter:
   # assets:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
+  assets:
+    - images/BiblioPiso2-blur.jpg
+    - images/BiblioPiso3-blur.jpg
+    - images/BiblioPiso4-blur.jpg
+    - images/BiblioPiso5-blur.jpg
+    - images/biblioOutside.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -74,6 +80,10 @@ flutter:
     - family: Silent Reaction
       fonts:
         - asset: fonts/Silent_Reaction.ttf
+          weight: 700
+    - family: Bebas
+      fonts:
+        - asset: fonts/BebasNeue-Regular.ttf
           weight: 700
   #
   # For details regarding fonts from package dependencies,
