@@ -21,6 +21,8 @@ dependencies:
     sdk: flutter
   mysql1: ^0.17.0+1
 
+  hidden_drawer_menu: ^1.1.2
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -68,6 +70,11 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  fonts:
+    - family: Silent Reaction
+      fonts:
+        - asset: fonts/Silent_Reaction.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
