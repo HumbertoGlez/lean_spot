@@ -46,7 +46,7 @@ class BiblioPageState extends State<BiblioPage> {
             child: new Image.asset(
               'images/biblioOutside.jpg',
               fit: BoxFit.cover,
-              height: 700,
+              height: 800,
               color: Colors.blue[900],
               colorBlendMode: BlendMode.multiply,
             ),

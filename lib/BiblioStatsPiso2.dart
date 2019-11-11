@@ -10,7 +10,7 @@ class BiblioStatsPiso2 extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-      title: 'Stats Biblio Piso 1',
+      title: 'Stats Biblio Piso 2',
       debugShowCheckedModeBanner: false,
       home: StatsPage(),
     );
@@ -33,7 +33,7 @@ class StatsPageState extends State<StatsPage> {
             child: new Image.asset(
               'images/biblioOutside.jpg',
               fit: BoxFit.cover,
-              height: 700,
+              height: 800,
               color: Colors.blue[900],
               colorBlendMode: BlendMode.multiply,
             ),
