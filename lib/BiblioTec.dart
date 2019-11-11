@@ -1,208 +1,133 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:lean_spot/BiblioStatsPiso2.dart';
+import 'package:lean_spot/BiblioStatsPiso3.dart';
+import 'package:lean_spot/BiblioStatsPiso4.dart';
+import 'package:lean_spot/BiblioStatsPiso5.dart';
 
+/// Main screen for BiblioTec, here the user can choose what floor to check
 class BiblioTec extends StatelessWidget {
   final String name;
   final Color mainColor;
 
   BiblioTec({
     this.name,
-    this.mainColor,
+    this.mainColor
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-//      color: mainColor,
-      decoration: BoxDecoration(
-        color: Colors.blueGrey,
-        image: DecorationImage(
-          image: AssetImage('images/biblioOutside.jpg'),
-          fit: BoxFit.cover,
-          colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.dstATop),
-        )
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Column(
-//              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                InkResponse(
-                  child: Container(
-                    decoration: BoxDecoration(boxShadow: [
-                      new BoxShadow(
-                          color: Colors.black,
-                          offset: new Offset(15, 20.0),
-                          blurRadius: 20.0,
-                        ),
-                      ],
-                    ),
-                    child: Card(
-                      margin: EdgeInsets.only(top: 20),
-                      borderOnForeground: true,
-                      clipBehavior: Clip.antiAlias,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Stack(
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage('images/BiblioPiso2-blur.jpg'),
-                            width: MediaQuery.of(context).size.width * .45,
-                          ),
-                          Container(
-                            width: 185,
-                            margin: EdgeInsets.only(top: 70),
-                            color: Color(0x40000000),
-                            child:  Text(
-                              ' Piso 2',
-                              style: TextStyle(
-                                fontFamily: 'Bebas',
-                                color: Colors.white,
-                                fontSize: 40,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
-                InkResponse(
-                  child: Container(
-                    decoration: BoxDecoration(boxShadow: [
-                      new BoxShadow(
-                        color: Colors.black,
-                        offset: new Offset(15, 20.0),
-                        blurRadius: 20.0,
-                      ),
-                    ],
-                    ),
-                    child: Card(
-                      margin: EdgeInsets.only(top: 20),
-                      borderOnForeground: true,
-                      clipBehavior: Clip.antiAlias,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Stack(
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage('images/BiblioPiso4-blur.jpg'),
-                            width: MediaQuery.of(context).size.width * .45,
-                          ),
-                          Container(
-                            width: 185,
-                            margin: EdgeInsets.only(top: 70),
-                            color: Color(0x40000000),
-                            child:  Text(
-                              ' Piso 4',
-                              style: TextStyle(
-                                fontFamily: 'Bebas',
-                                color: Colors.white,
-                                fontSize: 40,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                InkResponse(
-                  child: Container(
-                    decoration: BoxDecoration(boxShadow: [
-                      new BoxShadow(
-                        color: Colors.black,
-                        offset: new Offset(15, 20.0),
-                        blurRadius: 20.0,
-                      ),
-                    ],
-                    ),
-                    child: Card(
-                      margin: EdgeInsets.only(top: 20),
-                      borderOnForeground: true,
-                      clipBehavior: Clip.antiAlias,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Stack(
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage('images/BiblioPiso3-blur.jpg'),
-                            width: MediaQuery.of(context).size.width * .45,
-                          ),
-                          Container(
-                            width: 185,
-                            margin: EdgeInsets.only(top: 70),
-                            color: Color(0x40000000),
-                            child:  Text(
-                              ' Piso 3',
-                              style: TextStyle(
-                                fontFamily: 'Bebas',
-                                color: Colors.white,
-                                fontSize: 40,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
-                InkResponse(
-                  child: Container(
-                    decoration: BoxDecoration(boxShadow: [
-                      new BoxShadow(
-                        color: Colors.black,
-                        offset: new Offset(15, 20.0),
-                        blurRadius: 20.0,
-                      ),
-                    ],
-                    ),
-                    child: Card(
-                      margin: EdgeInsets.only(top: 20),
-                      borderOnForeground: true,
-                      clipBehavior: Clip.antiAlias,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Stack(
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage('images/BiblioPiso5-blur.jpg'),
-                            width: MediaQuery.of(context).size.width * .45,
-                          ),
-                          Container(
-                            width: 185,
-                            margin: EdgeInsets.only(top: 70),
-                            color: Color(0x40000000),
-                            child:  Text(
-                              ' Piso 5',
-                              style: TextStyle(
-                                fontFamily: 'Bebas',
-                                color: Colors.white,
-                                fontSize: 40,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    return MaterialApp(
+      title: 'BiblioTec',
+      debugShowCheckedModeBanner: false,
+      home: BiblioPage(),
     );
   }
 }
+
+class BiblioPage extends StatefulWidget {
+  @override
+  BiblioPageState createState() => new BiblioPageState();
+}
+
+class BiblioPageState extends State<BiblioPage> {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+//        backgroundColor: Colors.blue[50],
+        body: Stack(
+        children: <Widget>[
+          Center(
+            child: new Image.asset(
+              'images/biblioOutside.jpg',
+              fit: BoxFit.cover,
+              height: 700,
+              color: Colors.blue[900],
+              colorBlendMode: BlendMode.multiply,
+            ),
+          ),
+          ListView(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  roundCards('images/BiblioPiso2.jpg', 'Piso 2', BiblioStatsPiso2()),
+                  roundCards('images/BiblioPiso3.jpg', 'Piso 3', BiblioStatsPiso3())
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  roundCards('images/BiblioPiso4.jpg', 'Piso 4', BiblioStatsPiso4()),
+                  roundCards('images/BiblioPiso5.jpg', 'Piso 5', BiblioStatsPiso5())
+                ],
+              ),
+            ],
+          )
+        ]
+      )
+    );
+  }
+
+  Widget roundCards(String url, String about, Widget page) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (context) => page),
+        );
+      },
+      child: Padding(
+        padding: EdgeInsets.only(top: 30, bottom: 30),
+        child: Container(
+          height: 250,
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 0.6,
+                  color: Colors.white,
+                )
+              ],
+              border: Border.all(width: 10, color: Colors.grey[200]),
+              borderRadius: BorderRadius.circular(14.0),
+              color: Colors.transparent),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                width: 150,
+                height: 240,
+                decoration: BoxDecoration(
+  //                color: Colors.black,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(url)
+                  )
+                )
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 0, top: 180),
+                  color: Color(0x40000000),
+                  width: 150,
+                  child: Text(
+                      ' ' + about,
+                      style: TextStyle(
+                        fontFamily: 'Bebas',
+                        fontSize: 40,
+                        color: Colors.white
+                      ),
+                  )
+              ),
+            ],
+          ),
+        ),
+      )
+    );
+  }
+}
+
