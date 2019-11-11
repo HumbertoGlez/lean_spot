@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 class BiblioStatsPiso2 extends StatelessWidget {
   @override
@@ -25,6 +26,81 @@ class StatsPage extends StatefulWidget {
 class StatsPageState extends State<StatsPage> {
   @override
   Widget build(BuildContext context) {
+
+    /// SET UP THE GRAPH
+    var data = [
+      new DevicesPerHour(1, 50, Colors.red),
+      new DevicesPerHour(2, 75, Colors.blue),
+      new DevicesPerHour(3, 65, Colors.green),
+      new DevicesPerHour(4, 60, Colors.purple),
+      new DevicesPerHour(5, 65, Colors.orange),
+      new DevicesPerHour(6, 75, Colors.pink),
+    ];
+    var series = [
+      new charts.Series<DevicesPerHour, int>(
+        id: 'Hora',
+        domainFn: ((DevicesPerHour fluxData, _) => fluxData.hour),
+        measureFn: (DevicesPerHour fluxData, _) => fluxData.devices,
+        colorFn: (DevicesPerHour fluxData, _) => fluxData.color,
+        areaColorFn: (DevicesPerHour fluxData, _) => fluxData.color.lighter,
+        data: data,
+      ),
+    ];
+    var chart = new charts.LineChart(
+      series,
+      defaultRenderer: new charts.LineRendererConfig(includeArea: true, stacked: true),
+      animate: true,
+      behaviors: [
+        new charts.ChartTitle('Horas',
+          behaviorPosition: charts.BehaviorPosition.bottom,
+          titleOutsideJustification: charts.OutsideJustification.middleDrawArea),
+        new charts.ChartTitle('Ocupación',
+          behaviorPosition: charts.BehaviorPosition.start,
+          titleOutsideJustification: charts.OutsideJustification.middleDrawArea),
+      ],
+    );
+
+    /// WIDGETS FOR THIS SCREEN
+    Widget mainStatus() {
+      return Container(
+          margin: EdgeInsets.only(right: 20),
+          child: Text(
+            'Lleno',
+            style: TextStyle(
+              fontFamily: 'Bebas',
+              fontSize: 60,
+              color: Colors.red,
+            ),
+          )
+      );
+    }
+
+    Widget graph() {
+      return Padding(
+          padding: EdgeInsets.only(top: 30, bottom: 30),
+          child: Container(
+            height: 250,
+            width: 370,
+            decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 0.6,
+                    color: Colors.grey[200],
+                  )
+                ],
+                borderRadius: BorderRadius.circular(14.0),
+                color: Colors.transparent),
+            child: Padding(
+              padding: new EdgeInsets.all(10),
+              child: new SizedBox(
+                height: 200,
+                child: chart,
+              ),
+            ),
+          )
+      );
+    }
+
     return new Scaffold(
       backgroundColor: Colors.grey[200],
       body: Stack(
@@ -60,7 +136,7 @@ class StatsPageState extends State<StatsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-//                  graph()
+                  graph()
                 ],
               ),
               Row(
@@ -75,18 +151,14 @@ class StatsPageState extends State<StatsPage> {
       ),
     );
   }
+}
 
-  Widget mainStatus() {
-    return Container(
-      margin: EdgeInsets.only(right: 20),
-      child: Text(
-        'Lleno',
-        style: TextStyle(
-          fontFamily: 'Bebas',
-          fontSize: 60,
-          color: Colors.red,
-        ),
-      )
-    );
-  }
+class DevicesPerHour{
+  final int hour;
+  final int devices;
+  final charts.Color color;
+
+  DevicesPerHour(this.hour, this.devices, Color color)
+    : this.color = new charts.Color(
+    r: color.red, g: color.green, b: color.blue, a: color.alpha);
 }
