@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:mysql1/mysql1.dart' as mysql;
+import 'dart:async';
+import 'dart:io';
+
 
 class BiblioStatsPiso2 extends StatelessWidget {
   @override
@@ -23,18 +27,53 @@ class StatsPage extends StatefulWidget {
   StatsPageState createState() => new StatsPageState();
 }
 
-class StatsPageState extends State<StatsPage> {
-  @override
-  Widget build(BuildContext context) {
 
+class StatsPageState extends State<StatsPage> {
+  List<int> _horas = List<int>();
+  List<int> _valores = List<int>();
+  Future _callData() async{
+    // Open a connection (testdb should already exist)
+    final connection = await mysql.MySqlConnection.connect(new mysql.ConnectionSettings(
+        host: '35.188.61.105',
+        port: 3306,
+        user: 'root',
+        password: 'PJKDp7lFjA1jxyn0',
+        db: 'EMPLEATEC',
+        ));
+    var results = await connection.query('SELECT * FROM Conteo Limit 6');
+
+    for (var row in results) {
+      _valores.add(row[0]);
+      _horas.add(row[0]);
+    }
+
+    // Finally, close the connection
+    await connection.close();
+    return [_horas, _valores];
+  }
+
+
+
+  @override
+  void initState(){
+    super.initState();
+    _callData().then((data) {
+      setState(() {
+        this._horas= data[0];
+        this._valores = data[1];
+      });
+    });
+  }
+  @override
+  Widget build(BuildContext context){
     /// SET UP THE GRAPH
     var data = [
-      new DevicesPerHour(1, 50, Colors.red),
-      new DevicesPerHour(2, 75, Colors.blue),
-      new DevicesPerHour(3, 65, Colors.green),
-      new DevicesPerHour(4, 60, Colors.purple),
-      new DevicesPerHour(5, 65, Colors.orange),
-      new DevicesPerHour(6, 75, Colors.pink),
+      new DevicesPerHour(_horas[0], _valores[0], Colors.red),
+      new DevicesPerHour(_horas[1], _valores[1], Colors.blue),
+      new DevicesPerHour(_horas[2], _valores[2], Colors.green),
+      new DevicesPerHour(_horas[3], _valores[3], Colors.purple),
+      new DevicesPerHour(_horas[4], _valores[4], Colors.orange),
+      new DevicesPerHour(_horas[5], _valores[5], Colors.pink),
     ];
     var series = [
       new charts.Series<DevicesPerHour, int>(
@@ -46,12 +85,14 @@ class StatsPageState extends State<StatsPage> {
         data: data,
       ),
     ];
+
+
     var chart = new charts.LineChart(
       series,
       defaultRenderer: new charts.LineRendererConfig(includeArea: true, stacked: true),
       animate: true,
       behaviors: [
-        new charts.ChartTitle('Horas',
+        new charts.ChartTitle("Horas",
           behaviorPosition: charts.BehaviorPosition.bottom,
           titleOutsideJustification: charts.OutsideJustification.middleDrawArea),
         new charts.ChartTitle('Ocupación',
@@ -65,7 +106,7 @@ class StatsPageState extends State<StatsPage> {
       return Container(
           margin: EdgeInsets.only(right: 20),
           child: Text(
-            'Lleno',
+            "Lleno",
             style: TextStyle(
               fontFamily: 'Bebas',
               fontSize: 60,
