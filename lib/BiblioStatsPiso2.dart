@@ -33,8 +33,7 @@ class StatsPageState extends State<StatsPage> {
       new DevicesPerHour(2, 75, Colors.blue),
       new DevicesPerHour(3, 65, Colors.green),
       new DevicesPerHour(4, 60, Colors.purple),
-      new DevicesPerHour(5, 65, Colors.orange),
-      new DevicesPerHour(6, 75, Colors.pink),
+      new DevicesPerHour(5, 50, Colors.orange),
     ];
     var series = [
       new charts.Series<DevicesPerHour, int>(
@@ -48,16 +47,20 @@ class StatsPageState extends State<StatsPage> {
     ];
     var chart = new charts.LineChart(
       series,
-      defaultRenderer: new charts.LineRendererConfig(includeArea: true, stacked: true),
+      defaultRenderer: new charts.LineRendererConfig(includePoints: true, stacked: true),
       animate: true,
       behaviors: [
-        new charts.ChartTitle('Horas',
+        new charts.ChartTitle('Hora',
           behaviorPosition: charts.BehaviorPosition.bottom,
           titleOutsideJustification: charts.OutsideJustification.middleDrawArea),
         new charts.ChartTitle('Ocupación',
           behaviorPosition: charts.BehaviorPosition.start,
           titleOutsideJustification: charts.OutsideJustification.middleDrawArea),
       ],
+      primaryMeasureAxis:
+          new charts.NumericAxisSpec(
+              showAxisLine: true,
+              renderSpec: new charts.NoneRenderSpec()),
     );
 
     /// WIDGETS FOR THIS SCREEN
@@ -98,6 +101,76 @@ class StatsPageState extends State<StatsPage> {
               ),
             ),
           )
+      );
+    }
+    
+    Widget recommendations() {
+      return Padding(
+        padding: EdgeInsets.only(bottom: 30),
+        child: Container(
+          height: 90,
+          width: 370,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 0.6,
+                color: Colors.grey[200],
+              )
+            ],
+            borderRadius: BorderRadius.circular(14.0),
+            color: Colors.transparent),
+          child: Padding(
+          padding: new EdgeInsets.all(15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'Mejor horario de visita: ',
+                      style: TextStyle(
+                          fontFamily: 'Bebas',
+                          fontSize: 25,
+                          color: Colors.blue[900]
+                      ),
+                    ),
+                    Text(
+                        '6PM - 11PM ',
+                        style: TextStyle(
+                            fontFamily: 'Bebas',
+                            fontSize: 25,
+                            color: Colors.green[700]
+                        ),
+                    )
+                  ]
+                ),
+
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Peor horario de visita: ',
+                        style: TextStyle(
+                            fontFamily: 'Bebas',
+                            fontSize: 25,
+                            color: Colors.blue[900]
+                        ),
+                      ),
+                      Text(
+                        '1PM - 4PM ',
+                        style: TextStyle(
+                            fontFamily: 'Bebas',
+                            fontSize: 25,
+                            color: Colors.red[700]
+                        ),
+                      )
+                    ]
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     }
 
@@ -142,7 +215,7 @@ class StatsPageState extends State<StatsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-//                  recommendations()
+                  recommendations()
                 ],
               ),
             ],
