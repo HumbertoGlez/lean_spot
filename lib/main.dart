@@ -34,7 +34,7 @@ class SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    duration = 3000;
+    duration = 2000;
     _animationController = new AnimationController(
         vsync: this, duration: Duration(milliseconds: 1000));
     _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
