@@ -77,9 +77,8 @@ class BiblioPageState extends State<BiblioPage> {
   Widget roundCards(String url, String about, Widget page) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          CupertinoPageRoute(builder: (context) => page),
+        Navigator.of(context).push(
+          CupertinoPageRoute(builder: (BuildContext context) => page),
         );
       },
       child: Padding(

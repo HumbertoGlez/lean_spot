@@ -14,7 +14,7 @@ class Centrales extends StatelessWidget {
     return Container(
       color: mainColor,
       child: Center(
-        child: Text("Screen 2",
+        child: Text("Centrales",
             style: TextStyle(color: Colors.white, fontSize: 30.0)),
       ),
     );
