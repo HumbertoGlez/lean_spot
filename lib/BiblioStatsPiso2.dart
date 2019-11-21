@@ -1,3 +1,5 @@
+// UI Controller Bibliotec Piso 2
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,6 +26,7 @@ class StatsPageState extends State<StatsPage> {
   List<int> _horas = List<int>();
   List<int> _valores = List<int>();
   var data, series;
+  //
   Future _callData() async{
     // Open a connection (testdb should already exist)
     final connection = await mysql.MySqlConnection.connect(new mysql.ConnectionSettings(
@@ -33,11 +36,11 @@ class StatsPageState extends State<StatsPage> {
         password: 'PJKDp7lFjA1jxyn0',
         db: 'EMPLEATEC',
         ));
-    var results = await connection.query('SELECT * FROM Conteo Limit 6');
-
+    var results = await connection.query('SELECT HOUR(pushTime), MINUTE(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo  WHERE pushTime >= DATE_SUB(NOW(), INTERVAL 6 MINUTE) GROUP BY HOUR(pushTime), MINUTE(pushTime) LIMIT 6');
+    print(results);
     for (var row in results) {
-      _valores.add(row[0]);
-      _horas.add(row[0]);
+      _valores.add(row[2]);
+      _horas.add(row[1]);
     }
 
     // Finally, close the connection
@@ -80,6 +83,8 @@ class StatsPageState extends State<StatsPage> {
               builder: (BuildContext context) => stats()));
         });
   }
+
+  /// UI Bibliotec piso 2
   @override
   Widget build(BuildContext context){
     return LoadingScreen(new Image.asset(
@@ -91,7 +96,8 @@ class StatsPageState extends State<StatsPage> {
     );
   }
 
-  /// WIDGETS FOR THIS SCREEN
+  /// WIDGETS de UI bibliotec piso2
+  // Despliega el estatus de disponibilidad de Bibliotec Piso 2
   Widget stats() {
     return new Scaffold(
       backgroundColor: Colors.grey[200],
@@ -158,7 +164,7 @@ class StatsPageState extends State<StatsPage> {
     );
   }
 
-  /// SET UP THE GRAPH
+  /// Crea la gráfica
   Widget chart() {
     return charts.LineChart(
       series,
@@ -182,6 +188,8 @@ class StatsPageState extends State<StatsPage> {
     );
   }
 
+  // Despliega la gráfica
+  // Parte de UI
   Widget graph() {
     return Padding(
         padding: EdgeInsets.only(top: 30, bottom: 30),
