@@ -1,41 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:lean_spot/BiblioStatsPiso2.dart';
-import 'package:lean_spot/BiblioStatsPiso3.dart';
-import 'package:lean_spot/BiblioStatsPiso4.dart';
-import 'package:lean_spot/BiblioStatsPiso5.dart';
+import 'package:lean_spot/StatsScreen.dart';
 
 /// Main screen for BiblioTec, here the user can choose what floor to check
-class BiblioTec extends StatelessWidget {
-  final String name;
-  final Color mainColor;
-
-  BiblioTec({
-    this.name,
-    this.mainColor
-  });
-
+class BiblioTec extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    return MaterialApp(
-      title: 'BiblioTec',
-      debugShowCheckedModeBanner: false,
-      home: BiblioPage(),
-    );
-  }
+  BiblioTecState createState() => new BiblioTecState();
 }
 
-class BiblioPage extends StatefulWidget {
-  @override
-  BiblioPageState createState() => new BiblioPageState();
-}
-
-class BiblioPageState extends State<BiblioPage> {
+class BiblioTecState extends State<BiblioTec> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -53,18 +27,67 @@ class BiblioPageState extends State<BiblioPage> {
           ),
           ListView(
             children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 30),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  roundCards('images/BiblioPiso2.jpg', 'Piso 2', BiblioStatsPiso2()),
-                  roundCards('images/BiblioPiso3.jpg', 'Piso 3', BiblioStatsPiso3())
+                  roundCards('images/BiblioPiso2.jpg', 'Piso 2',
+                      StatsScreen(
+                        lugar:'Piso 2',
+                        backgroundImage: new Image.asset(
+                          'images/biblioOutside.jpg',
+                          fit: BoxFit.cover,
+                          height: 800,
+                          color: Colors.blue[900],
+                          colorBlendMode: BlendMode.multiply,
+                        ),
+                        queryHoras: 'SELECT HOUR(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 5 HOUR)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime) LIMIT 6',
+                        queryRealTime: 'SELECT HOUR(pushTime), MINUTE(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND MINUTE(pushTime) >= MINUTE(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime), MINUTE(pushTime) LIMIT 5',
+//                      queryRealTime: '',
+                      )
+                  ),
+                  roundCards('images/BiblioPiso3.jpg', 'Piso 3',
+                      StatsScreen(
+                        lugar:'Piso 3',
+                        backgroundImage: new Image.asset(
+                          'images/biblioOutside.jpg',
+                          fit: BoxFit.cover,
+                          height: 800,
+                          color: Colors.blue[900],
+                          colorBlendMode: BlendMode.multiply,
+                        ),
+                        queryHoras: 'SELECT * FROM Conteo Limit 6',))
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  roundCards('images/BiblioPiso4.jpg', 'Piso 4', BiblioStatsPiso4()),
-                  roundCards('images/BiblioPiso5.jpg', 'Piso 5', BiblioStatsPiso5())
+                  roundCards('images/BiblioPiso4.jpg', 'Piso 4',
+                      StatsScreen(
+                        lugar:'Piso 4',
+                        backgroundImage: new Image.asset(
+                          'images/biblioOutside.jpg',
+                          fit: BoxFit.cover,
+                          height: 800,
+                          color: Colors.blue[900],
+                          colorBlendMode: BlendMode.multiply,
+                        ),
+                        queryHoras: 'SELECT * FROM Conteo Limit 6',
+                      )
+                  ),
+                  roundCards('images/BiblioPiso5.jpg', 'Piso 5',
+                      StatsScreen(
+                        lugar:'Piso 5',
+                        backgroundImage: new Image.asset(
+                          'images/biblioOutside.jpg',
+                          fit: BoxFit.cover,
+                          height: 800,
+                          color: Colors.blue[900],
+                          colorBlendMode: BlendMode.multiply,
+                        ),
+                        queryHoras: 'SELECT * FROM Conteo Limit 6',
+                      )
+                  )
                 ],
               ),
             ],
@@ -74,15 +97,16 @@ class BiblioPageState extends State<BiblioPage> {
     );
   }
 
-  Widget roundCards(String url, String about, Widget page) {
+  Widget roundCards(String imageUrl, String about, Widget page) {
     return InkWell(
+      /// ESTA FUNCIÓN ES LA QUE DETECTA EL INPUT DEL USUARIO
       onTap: () {
         Navigator.of(context).push(
           CupertinoPageRoute(builder: (BuildContext context) => page),
         );
       },
       child: Padding(
-        padding: EdgeInsets.only(top: 30, bottom: 30),
+        padding: EdgeInsets.only(top: 10, bottom: 30),
         child: Container(
           height: 250,
           decoration: BoxDecoration(
@@ -105,7 +129,7 @@ class BiblioPageState extends State<BiblioPage> {
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(url)
+                    image: AssetImage(imageUrl)
                   )
                 )
               ),

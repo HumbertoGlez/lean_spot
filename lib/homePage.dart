@@ -7,15 +7,15 @@ import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 /// Set up home screen when opening the app
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   // Create list to store the menu items
   List<ScreenHiddenDrawer> items = new List();
 
@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
           selectedStyle: TextStyle(color: Colors.blue),
         ),
         // This is the screen assigned to that menu item
-        BiblioTec(name: "BiblioTec", mainColor: Colors.cyan[50],)));
+        BiblioTec()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(

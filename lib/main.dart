@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'homePage.dart';
 
-void main() => runApp(MyApp());
-class MyApp extends StatelessWidget {
+/// START APPLICATION
+void main() => runApp(LeanSpot());
+class LeanSpot extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -113,6 +114,6 @@ class SplashScreenState extends State<SplashScreen>
 
 Future<Widget> buildPageAsync() async {
   return Future.microtask(() {
-    return MyHomePage();
+    return HomePage();
   });
 }
