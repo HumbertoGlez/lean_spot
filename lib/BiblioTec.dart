@@ -43,7 +43,6 @@ class BiblioTecState extends State<BiblioTec> {
                         ),
                         queryHoras: 'SELECT HOUR(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 5 HOUR)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime) LIMIT 6',
                         queryRealTime: 'SELECT HOUR(pushTime), MINUTE(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND MINUTE(pushTime) >= MINUTE(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime), MINUTE(pushTime) LIMIT 5',
-//                      queryRealTime: '',
                       )
                   ),
                   roundCards('images/BiblioPiso3.jpg', 'Piso 3',
@@ -56,7 +55,10 @@ class BiblioTecState extends State<BiblioTec> {
                           color: Colors.blue[900],
                           colorBlendMode: BlendMode.multiply,
                         ),
-                        queryHoras: 'SELECT * FROM Conteo Limit 6',))
+                        queryHoras: 'SELECT HOUR(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 5 HOUR)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime) LIMIT 6',
+                        queryRealTime: 'SELECT HOUR(pushTime), MINUTE(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND MINUTE(pushTime) >= MINUTE(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime), MINUTE(pushTime) LIMIT 5',
+                      )
+                  )
                 ],
               ),
               Row(
@@ -72,7 +74,8 @@ class BiblioTecState extends State<BiblioTec> {
                           color: Colors.blue[900],
                           colorBlendMode: BlendMode.multiply,
                         ),
-                        queryHoras: 'SELECT * FROM Conteo Limit 6',
+                        queryHoras: 'SELECT HOUR(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 5 HOUR)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime) LIMIT 6',
+                        queryRealTime: 'SELECT HOUR(pushTime), MINUTE(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND MINUTE(pushTime) >= MINUTE(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime), MINUTE(pushTime) LIMIT 5',
                       )
                   ),
                   roundCards('images/BiblioPiso5.jpg', 'Piso 5',
@@ -85,7 +88,8 @@ class BiblioTecState extends State<BiblioTec> {
                           color: Colors.blue[900],
                           colorBlendMode: BlendMode.multiply,
                         ),
-                        queryHoras: 'SELECT * FROM Conteo Limit 6',
+                        queryHoras: 'SELECT HOUR(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 5 HOUR)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime) LIMIT 6',
+                        queryRealTime: 'SELECT HOUR(pushTime), MINUTE(pushTime), COUNT(distinct(mac)) FROM EMPLEATEC.Conteo WHERE HOUR(pushTime) >= HOUR(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND MINUTE(pushTime) >= MINUTE(DATE_SUB(NOW(), INTERVAL 6 MINUTE)) AND DAY(pushTime) = 4 AND MONTH(pushTime) = 10 GROUP BY HOUR(pushTime), MINUTE(pushTime) LIMIT 5',
                       )
                   )
                 ],

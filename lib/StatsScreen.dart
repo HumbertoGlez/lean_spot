@@ -7,7 +7,6 @@ import 'package:mysql1/mysql1.dart' as mysql;
 import 'dart:async';
 import 'dart:io';
 import 'loadingScreen.dart';
-import 'BiblioTec.dart';
 
 class StatsScreen extends StatefulWidget {
   final String lugar;
@@ -49,7 +48,7 @@ class StatsScreenState extends State<StatsScreen> with TickerProviderStateMixin{
     var results = await connection.query(widget.queryHoras);
 
     for (var row in results) {
-      _valores.add(row[1]);
+      _valores.add(row[0]);
       _horas.add(row[0]);
     }
 
@@ -71,8 +70,8 @@ class StatsScreenState extends State<StatsScreen> with TickerProviderStateMixin{
 
     for (var row in realTimeResults) {
       _horaRealtime.add(row[0]);
-      _valoresMin.add(row[2]);
-      _minutos.add(row[1]);
+      _valoresMin.add(row[0]);
+      _minutos.add(row[0]);
     }
 
     // Finally, close the connection
@@ -144,16 +143,7 @@ class StatsScreenState extends State<StatsScreen> with TickerProviderStateMixin{
 
             /// Go from the loading screen to stats page when the data has been received
             Navigator.of(context).pushReplacement(new MaterialPageRoute(
-                builder: (BuildContext context) => stats()));
-
-            everyMinute = Timer(Duration(seconds: 60), () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => new StatsScreen(
-                lugar: widget.lugar,
-                backgroundImage: widget.backgroundImage,
-                queryHoras: widget.queryHoras,
-                queryRealTime: widget.queryRealTime,
-              )));
-            });
+                builder: (BuildContext context) => stats()));            
           }
         })
         .catchError((e) => showError('No se pudo conectar a la base de datos.'));
@@ -174,6 +164,10 @@ class StatsScreenState extends State<StatsScreen> with TickerProviderStateMixin{
   Widget stats() {
     return new Scaffold(
       backgroundColor: Colors.grey[200],
+      appBar: new AppBar(
+        automaticallyImplyLeading: true,
+        title: new Text(widget.lugar),
+      ),
       body: Stack(
         children: <Widget>[
           Center(
@@ -181,6 +175,7 @@ class StatsScreenState extends State<StatsScreen> with TickerProviderStateMixin{
           ),
           ListView(
             children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 20),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -329,7 +324,7 @@ class StatsScreenState extends State<StatsScreen> with TickerProviderStateMixin{
           includePoints: true, stacked: true),
       animate: true,
       behaviors: [
-        new charts.ChartTitle("Tiempo",
+        new charts.ChartTitle("Minutos",
             behaviorPosition: charts.BehaviorPosition.bottom,
             titleOutsideJustification: charts.OutsideJustification
                 .middleDrawArea),

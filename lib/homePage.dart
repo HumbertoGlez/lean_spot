@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           baseStyle: TextStyle( color: Colors.white.withOpacity(0.5), fontSize: 25.0 ),
           selectedStyle: TextStyle(color: Colors.orange),
         ),
-        Centrales(name: "Centrales", mainColor: Colors.orange,)));
+        Centrales()));
 
     super.initState();
   }
