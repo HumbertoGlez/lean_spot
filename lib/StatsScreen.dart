@@ -48,7 +48,7 @@ class StatsScreenState extends State<StatsScreen> with TickerProviderStateMixin{
     var results = await connection.query(widget.queryHoras);
 
     for (var row in results) {
-      _valores.add(row[0]);
+      _valores.add(row[1]);
       _horas.add(row[0]);
     }
 
@@ -70,8 +70,8 @@ class StatsScreenState extends State<StatsScreen> with TickerProviderStateMixin{
 
     for (var row in realTimeResults) {
       _horaRealtime.add(row[0]);
-      _valoresMin.add(row[0]);
-      _minutos.add(row[0]);
+      _valoresMin.add(row[2]);
+      _minutos.add(row[1]);
     }
 
     // Finally, close the connection
