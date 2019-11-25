@@ -62,7 +62,7 @@ class CentralesState extends State<Centrales> {
         child: Padding(
           padding: EdgeInsets.only(top: 10, bottom: 30),
           child: Container(
-            height: 300,
+            height: 250,
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -77,7 +77,7 @@ class CentralesState extends State<Centrales> {
               children: <Widget>[
                 Container(
                     width: 300,
-                    height: 300,
+                    height: 250,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                         image: DecorationImage(
@@ -90,7 +90,7 @@ class CentralesState extends State<Centrales> {
                 Container(
                     margin: EdgeInsets.only(left: 0, top: 180),
                     color: Color(0x40000000),
-                    width: 150,
+                    width: 300,
                     child: Text(
                       ' ' + about,
                       style: TextStyle(
